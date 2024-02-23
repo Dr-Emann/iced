@@ -20,6 +20,7 @@ pub(in crate::decoder) struct OpCodeHandler_VectorLength_EVEX {
 	has_modrm: bool,
 	handlers: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 4],
 }
+op_handler_impl!(OpCodeHandler_VectorLength_EVEX);
 
 impl OpCodeHandler_VectorLength_EVEX {
 	#[allow(trivial_casts)]
@@ -56,6 +57,7 @@ pub(in crate::decoder) struct OpCodeHandler_VectorLength_EVEX_er {
 	has_modrm: bool,
 	handlers: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 4],
 }
+op_handler_impl!(OpCodeHandler_VectorLength_EVEX_er);
 
 impl OpCodeHandler_VectorLength_EVEX_er {
 	#[allow(trivial_casts)]
@@ -102,6 +104,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_V_H_Ev_er {
 	tuple_type_w0: TupleType,
 	tuple_type_w1: TupleType,
 }
+op_handler_impl!(OpCodeHandler_EVEX_V_H_Ev_er);
 
 impl OpCodeHandler_EVEX_V_H_Ev_er {
 	#[inline]
@@ -166,6 +169,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_V_H_Ev_Ib {
 	tuple_type_w0: TupleType,
 	tuple_type_w1: TupleType,
 }
+op_handler_impl!(OpCodeHandler_EVEX_V_H_Ev_Ib);
 
 impl OpCodeHandler_EVEX_V_H_Ev_Ib {
 	#[inline]
@@ -219,6 +223,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_Ed_V_Ib {
 	tuple_type32: TupleType,
 	tuple_type64: TupleType,
 }
+op_handler_impl!(OpCodeHandler_EVEX_Ed_V_Ib);
 
 impl OpCodeHandler_EVEX_Ed_V_Ib {
 	#[inline]
@@ -274,6 +279,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkHW_er {
 	only_sae: bool,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkHW_er);
 
 impl OpCodeHandler_EVEX_VkHW_er {
 	#[inline]
@@ -333,6 +339,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkHW_er_ur {
 	base_reg: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkHW_er_ur);
 
 impl OpCodeHandler_EVEX_VkHW_er_ur {
 	#[inline]
@@ -393,6 +400,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkW_er {
 	only_sae: bool,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkW_er);
 
 impl OpCodeHandler_EVEX_VkW_er {
 	#[inline]
@@ -469,6 +477,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkWIb_er {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkWIb_er);
 
 impl OpCodeHandler_EVEX_VkWIb_er {
 	#[inline]
@@ -514,6 +523,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkW {
 	base_reg2: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkW);
 
 impl OpCodeHandler_EVEX_VkW {
 	#[inline]
@@ -569,6 +579,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_WkV {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_WkV);
 
 impl OpCodeHandler_EVEX_WkV {
 	#[inline]
@@ -636,6 +647,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkM {
 	code: Code,
 	base_reg: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkM);
 
 impl OpCodeHandler_EVEX_VkM {
 	#[inline]
@@ -674,6 +686,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkWIb {
 	base_reg2: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkWIb);
 
 impl OpCodeHandler_EVEX_VkWIb {
 	#[inline]
@@ -723,6 +736,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_WkVIb {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_WkVIb);
 
 impl OpCodeHandler_EVEX_WkVIb {
 	#[inline]
@@ -765,6 +779,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_HkWIb {
 	base_reg2: Register,
 	tuple_type: TupleType,
 }
+op_handler_impl!(OpCodeHandler_EVEX_HkWIb);
 
 impl OpCodeHandler_EVEX_HkWIb {
 	#[inline]
@@ -808,6 +823,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_HWIb {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_HWIb);
 
 impl OpCodeHandler_EVEX_HWIb {
 	#[inline]
@@ -847,6 +863,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_WkVIb_er {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_WkVIb_er);
 
 impl OpCodeHandler_EVEX_WkVIb_er {
 	#[inline]
@@ -892,6 +909,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VW_er {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VW_er);
 
 impl OpCodeHandler_EVEX_VW_er {
 	#[inline]
@@ -935,6 +953,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VW {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VW);
 
 impl OpCodeHandler_EVEX_VW {
 	#[inline]
@@ -978,6 +997,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_WV {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_WV);
 
 impl OpCodeHandler_EVEX_WV {
 	#[inline]
@@ -1020,6 +1040,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VM {
 	code: Code,
 	base_reg: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VM);
 
 impl OpCodeHandler_EVEX_VM {
 	#[inline]
@@ -1058,6 +1079,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VK {
 	base_reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VK);
 
 impl OpCodeHandler_EVEX_VK {
 	#[inline]
@@ -1095,6 +1117,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_KR {
 	base_reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_EVEX_KR);
 
 impl OpCodeHandler_EVEX_KR {
 	#[inline]
@@ -1135,6 +1158,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_KkHWIb_sae {
 	base_reg: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_KkHWIb_sae);
 
 impl OpCodeHandler_EVEX_KkHWIb_sae {
 	#[inline]
@@ -1187,6 +1211,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkHW {
 	base_reg3: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkHW);
 
 impl OpCodeHandler_EVEX_VkHW {
 	#[inline]
@@ -1242,6 +1267,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkHM {
 	base_reg1: Register,
 	base_reg2: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkHM);
 
 impl OpCodeHandler_EVEX_VkHM {
 	#[inline]
@@ -1282,6 +1308,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkHWIb {
 	base_reg3: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkHWIb);
 
 impl OpCodeHandler_EVEX_VkHWIb {
 	#[inline]
@@ -1341,6 +1368,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkHWIb_er {
 	base_reg3: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkHWIb_er);
 
 impl OpCodeHandler_EVEX_VkHWIb_er {
 	#[inline]
@@ -1391,6 +1419,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_KkHW {
 	base_reg: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_KkHW);
 
 impl OpCodeHandler_EVEX_KkHW {
 	#[inline]
@@ -1438,6 +1467,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_KP1HW {
 	code: Code,
 	base_reg: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_KP1HW);
 
 impl OpCodeHandler_EVEX_KP1HW {
 	#[inline]
@@ -1482,6 +1512,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_KkHWIb {
 	base_reg: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_KkHWIb);
 
 impl OpCodeHandler_EVEX_KkHWIb {
 	#[inline]
@@ -1530,6 +1561,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_WkHV {
 	base_reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_EVEX_WkHV);
 
 impl OpCodeHandler_EVEX_WkHV {
 	#[inline]
@@ -1563,6 +1595,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VHWIb {
 	code: Code,
 	base_reg: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VHWIb);
 
 impl OpCodeHandler_EVEX_VHWIb {
 	#[inline]
@@ -1605,6 +1638,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VHW {
 	base_reg2: Register,
 	base_reg3: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VHW);
 
 impl OpCodeHandler_EVEX_VHW {
 	#[inline]
@@ -1654,6 +1688,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VHM {
 	code: Code,
 	base_reg: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VHM);
 
 impl OpCodeHandler_EVEX_VHM {
 	#[inline]
@@ -1693,6 +1728,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_Gv_W_er {
 	base_reg: Register,
 	only_sae: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_Gv_W_er);
 
 impl OpCodeHandler_EVEX_Gv_W_er {
 	#[inline]
@@ -1754,6 +1790,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VX_Ev {
 	tuple_type_w0: TupleType,
 	tuple_type_w1: TupleType,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VX_Ev);
 
 impl OpCodeHandler_EVEX_VX_Ev {
 	#[inline]
@@ -1803,6 +1840,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_Ev_VX {
 	tuple_type_w0: TupleType,
 	tuple_type_w1: TupleType,
 }
+op_handler_impl!(OpCodeHandler_EVEX_Ev_VX);
 
 impl OpCodeHandler_EVEX_Ev_VX {
 	#[inline]
@@ -1851,6 +1889,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_Ev_VX_Ib {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_EVEX_Ev_VX_Ib);
 
 impl OpCodeHandler_EVEX_Ev_VX_Ib {
 	#[inline]
@@ -1892,6 +1931,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_MV {
 	code: Code,
 	base_reg: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_MV);
 
 impl OpCodeHandler_EVEX_MV {
 	#[inline]
@@ -1930,6 +1970,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VkEv_REXW {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VkEv_REXW);
 
 impl OpCodeHandler_EVEX_VkEv_REXW {
 	#[inline]
@@ -1974,6 +2015,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_Vk_VSIB {
 	base_reg: Register,
 	vsib_base: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_Vk_VSIB);
 
 impl OpCodeHandler_EVEX_Vk_VSIB {
 	#[inline]
@@ -2016,6 +2058,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VSIB_k1_VX {
 	vsib_index: Register,
 	base_reg: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VSIB_k1_VX);
 
 impl OpCodeHandler_EVEX_VSIB_k1_VX {
 	#[inline]
@@ -2054,6 +2097,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_VSIB_k1 {
 	code: Code,
 	vsib_index: Register,
 }
+op_handler_impl!(OpCodeHandler_EVEX_VSIB_k1);
 
 impl OpCodeHandler_EVEX_VSIB_k1 {
 	#[inline]
@@ -2090,6 +2134,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_GvM_VX_Ib {
 	tuple_type32: TupleType,
 	tuple_type64: TupleType,
 }
+op_handler_impl!(OpCodeHandler_EVEX_GvM_VX_Ib);
 
 impl OpCodeHandler_EVEX_GvM_VX_Ib {
 	#[inline]
@@ -2144,6 +2189,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX_KkWIb {
 	base_reg: Register,
 	can_broadcast: bool,
 }
+op_handler_impl!(OpCodeHandler_EVEX_KkWIb);
 
 impl OpCodeHandler_EVEX_KkWIb {
 	#[inline]

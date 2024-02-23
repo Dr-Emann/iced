@@ -21,6 +21,7 @@ pub(in crate::decoder) struct OpCodeHandler_VEX2 {
 	has_modrm: bool,
 	handler_mem: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_VEX2);
 
 impl OpCodeHandler_VEX2 {
 	#[inline]
@@ -46,6 +47,7 @@ pub(in crate::decoder) struct OpCodeHandler_VEX3 {
 	has_modrm: bool,
 	handler_mem: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_VEX3);
 
 impl OpCodeHandler_VEX3 {
 	#[inline]
@@ -71,6 +73,7 @@ pub(in crate::decoder) struct OpCodeHandler_XOP {
 	has_modrm: bool,
 	handler_reg0: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_XOP);
 
 impl OpCodeHandler_XOP {
 	#[inline]
@@ -96,6 +99,7 @@ pub(in crate::decoder) struct OpCodeHandler_EVEX {
 	has_modrm: bool,
 	handler_mem: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_EVEX);
 
 impl OpCodeHandler_EVEX {
 	#[inline]
@@ -121,6 +125,7 @@ pub(in crate::decoder) struct OpCodeHandler_PrefixEsCsSsDs {
 	has_modrm: bool,
 	seg: Register,
 }
+op_handler_impl!(OpCodeHandler_PrefixEsCsSsDs);
 
 impl OpCodeHandler_PrefixEsCsSsDs {
 	#[inline]
@@ -148,6 +153,7 @@ pub(in crate::decoder) struct OpCodeHandler_PrefixFsGs {
 	has_modrm: bool,
 	seg: Register,
 }
+op_handler_impl!(OpCodeHandler_PrefixFsGs);
 
 impl OpCodeHandler_PrefixFsGs {
 	#[inline]
@@ -173,6 +179,7 @@ impl OpCodeHandler_PrefixFsGs {
 pub(in crate::decoder) struct OpCodeHandler_Prefix66 {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_Prefix66);
 
 impl OpCodeHandler_Prefix66 {
 	#[inline]
@@ -199,6 +206,7 @@ impl OpCodeHandler_Prefix66 {
 pub(in crate::decoder) struct OpCodeHandler_Prefix67 {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_Prefix67);
 
 impl OpCodeHandler_Prefix67 {
 	#[inline]
@@ -221,6 +229,7 @@ impl OpCodeHandler_Prefix67 {
 pub(in crate::decoder) struct OpCodeHandler_PrefixF0 {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_PrefixF0);
 
 impl OpCodeHandler_PrefixF0 {
 	#[inline]
@@ -244,6 +253,7 @@ impl OpCodeHandler_PrefixF0 {
 pub(in crate::decoder) struct OpCodeHandler_PrefixF2 {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_PrefixF2);
 
 impl OpCodeHandler_PrefixF2 {
 	#[inline]
@@ -267,6 +277,7 @@ impl OpCodeHandler_PrefixF2 {
 pub(in crate::decoder) struct OpCodeHandler_PrefixF3 {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_PrefixF3);
 
 impl OpCodeHandler_PrefixF3 {
 	#[inline]
@@ -292,6 +303,7 @@ pub(in crate::decoder) struct OpCodeHandler_PrefixREX {
 	rex: u32,
 	handler: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_PrefixREX);
 
 impl OpCodeHandler_PrefixREX {
 	#[inline]
@@ -337,6 +349,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg {
 	reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Reg);
 
 impl OpCodeHandler_Reg {
 	#[inline]
@@ -359,6 +372,7 @@ pub(in crate::decoder) struct OpCodeHandler_RegIb {
 	reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_RegIb);
 
 impl OpCodeHandler_RegIb {
 	#[inline]
@@ -383,6 +397,7 @@ pub(in crate::decoder) struct OpCodeHandler_IbReg {
 	reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_IbReg);
 
 impl OpCodeHandler_IbReg {
 	#[inline]
@@ -406,6 +421,7 @@ pub(in crate::decoder) struct OpCodeHandler_AL_DX {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_AL_DX);
 
 impl OpCodeHandler_AL_DX {
 	#[inline]
@@ -428,6 +444,7 @@ pub(in crate::decoder) struct OpCodeHandler_DX_AL {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_DX_AL);
 
 impl OpCodeHandler_DX_AL {
 	#[inline]
@@ -450,6 +467,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ib {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Ib);
 
 impl OpCodeHandler_Ib {
 	#[inline]
@@ -472,6 +490,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ib3 {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Ib3);
 
 impl OpCodeHandler_Ib3 {
 	#[inline]
@@ -494,6 +513,7 @@ pub(in crate::decoder) struct OpCodeHandler_MandatoryPrefix {
 	has_modrm: bool,
 	handlers: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 4],
 }
+op_handler_impl!(OpCodeHandler_MandatoryPrefix);
 
 impl OpCodeHandler_MandatoryPrefix {
 	#[inline]
@@ -533,6 +553,7 @@ pub(in crate::decoder) struct OpCodeHandler_MandatoryPrefix3 {
 	handlers_reg: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler, bool); 4],
 	handlers_mem: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler, bool); 4],
 }
+op_handler_impl!(OpCodeHandler_MandatoryPrefix3);
 
 impl OpCodeHandler_MandatoryPrefix3 {
 	#[allow(clippy::too_many_arguments)]
@@ -599,6 +620,7 @@ pub(in crate::decoder) struct OpCodeHandler_MandatoryPrefix4 {
 	handler_f3: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 	handler_f2: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_MandatoryPrefix4);
 
 impl OpCodeHandler_MandatoryPrefix4 {
 	#[inline]
@@ -651,6 +673,7 @@ pub(in crate::decoder) struct OpCodeHandler_NIb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_NIb);
 
 impl OpCodeHandler_NIb {
 	#[inline]
@@ -679,6 +702,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reservednop {
 	reserved_nop_handler: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 	other_handler: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_Reservednop);
 
 impl OpCodeHandler_Reservednop {
 	#[inline]
@@ -707,6 +731,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Iz {
 	reg_base: [u32; 3],
 	state_flags_or_value: u32,
 }
+op_handler_impl!(OpCodeHandler_Ev_Iz);
 
 impl OpCodeHandler_Ev_Iz {
 	#[inline]
@@ -762,6 +787,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Ib {
 	state_flags_or_value: u32,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Ev_Ib);
 
 impl OpCodeHandler_Ev_Ib {
 	#[inline]
@@ -809,6 +835,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Ib2 {
 	reg_base: [u32; 3],
 	state_flags_or_value: u32,
 }
+op_handler_impl!(OpCodeHandler_Ev_Ib2);
 
 impl OpCodeHandler_Ev_Ib2 {
 	#[inline]
@@ -854,6 +881,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_1 {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Ev_1);
 
 impl OpCodeHandler_Ev_1 {
 	#[inline]
@@ -890,6 +918,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_CL {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Ev_CL);
 
 impl OpCodeHandler_Ev_CL {
 	#[inline]
@@ -925,6 +954,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev {
 	reg_base: [u32; 3],
 	state_flags_or_value: u32,
 }
+op_handler_impl!(OpCodeHandler_Ev);
 
 impl OpCodeHandler_Ev {
 	#[inline]
@@ -968,6 +998,7 @@ pub(in crate::decoder) struct OpCodeHandler_Rv {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Rv);
 
 impl OpCodeHandler_Rv {
 	#[inline]
@@ -996,6 +1027,7 @@ pub(in crate::decoder) struct OpCodeHandler_Rv_32_64 {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Rv_32_64);
 
 impl OpCodeHandler_Rv_32_64 {
 	#[inline]
@@ -1024,6 +1056,7 @@ pub(in crate::decoder) struct OpCodeHandler_Rq {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Rq);
 
 impl OpCodeHandler_Rq {
 	#[inline]
@@ -1050,6 +1083,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_REXW {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Ev_REXW);
 
 impl OpCodeHandler_Ev_REXW {
 	#[inline]
@@ -1108,6 +1142,7 @@ pub(in crate::decoder) struct OpCodeHandler_Evj {
 	code64: Code,
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Evj);
 
 impl OpCodeHandler_Evj {
 	#[inline]
@@ -1167,6 +1202,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ep {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Ep);
 
 impl OpCodeHandler_Ep {
 	#[inline]
@@ -1201,6 +1237,7 @@ pub(in crate::decoder) struct OpCodeHandler_Evw {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Evw);
 
 impl OpCodeHandler_Evw {
 	#[inline]
@@ -1234,6 +1271,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ew {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Ew);
 
 impl OpCodeHandler_Ew {
 	#[inline]
@@ -1268,6 +1306,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ms {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Ms);
 
 impl OpCodeHandler_Ms {
 	#[inline]
@@ -1302,6 +1341,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ev {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_Ev);
 
 impl OpCodeHandler_Gv_Ev {
 	#[inline]
@@ -1335,6 +1375,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gd_Rd {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Gd_Rd);
 
 impl OpCodeHandler_Gd_Rd {
 	#[inline]
@@ -1362,6 +1403,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_M_as {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_M_as);
 
 impl OpCodeHandler_Gv_M_as {
 	#[inline]
@@ -1396,6 +1438,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gdq_Ev {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gdq_Ev);
 
 impl OpCodeHandler_Gdq_Ev {
 	#[inline]
@@ -1434,6 +1477,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ev3 {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_Ev3);
 
 impl OpCodeHandler_Gv_Ev3 {
 	#[inline]
@@ -1468,6 +1512,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ev2 {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_Ev2);
 
 impl OpCodeHandler_Gv_Ev2 {
 	#[inline]
@@ -1508,6 +1553,7 @@ pub(in crate::decoder) struct OpCodeHandler_R_C {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_R_C);
 
 impl OpCodeHandler_R_C {
 	#[inline]
@@ -1562,6 +1608,7 @@ pub(in crate::decoder) struct OpCodeHandler_C_R {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_C_R);
 
 impl OpCodeHandler_C_R {
 	#[inline]
@@ -1616,6 +1663,7 @@ pub(in crate::decoder) struct OpCodeHandler_Jb {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Jb);
 
 impl OpCodeHandler_Jb {
 	#[inline]
@@ -1660,6 +1708,7 @@ pub(in crate::decoder) struct OpCodeHandler_Jx {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Jx);
 
 impl OpCodeHandler_Jx {
 	#[inline]
@@ -1709,6 +1758,7 @@ pub(in crate::decoder) struct OpCodeHandler_Jz {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Jz);
 
 impl OpCodeHandler_Jz {
 	#[inline]
@@ -1765,6 +1815,7 @@ pub(in crate::decoder) struct OpCodeHandler_Jb2 {
 	code64_32: Code,
 	code64_64: Code,
 }
+op_handler_impl!(OpCodeHandler_Jb2);
 
 impl OpCodeHandler_Jb2 {
 	#[inline]
@@ -1826,6 +1877,7 @@ pub(in crate::decoder) struct OpCodeHandler_Jdisp {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_Jdisp);
 
 impl OpCodeHandler_Jdisp {
 	#[inline]
@@ -1858,6 +1910,7 @@ pub(in crate::decoder) struct OpCodeHandler_PushOpSizeReg {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_PushOpSizeReg);
 
 impl OpCodeHandler_PushOpSizeReg {
 	#[inline]
@@ -1893,6 +1946,7 @@ pub(in crate::decoder) struct OpCodeHandler_PushEv {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_PushEv);
 
 impl OpCodeHandler_PushEv {
 	#[inline]
@@ -1946,6 +2000,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Gv {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Ev_Gv);
 
 impl OpCodeHandler_Ev_Gv {
 	#[inline]
@@ -1981,6 +2036,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Gv_flags {
 	reg_base: [u32; 3],
 	state_flags_or_value: u32,
 }
+op_handler_impl!(OpCodeHandler_Ev_Gv_flags);
 
 impl OpCodeHandler_Ev_Gv_flags {
 	#[inline]
@@ -2027,6 +2083,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Gv_32_64 {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Ev_Gv_32_64);
 
 impl OpCodeHandler_Ev_Gv_32_64 {
 	#[inline]
@@ -2063,6 +2120,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Gv_Ib {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Ev_Gv_Ib);
 
 impl OpCodeHandler_Ev_Gv_Ib {
 	#[inline]
@@ -2099,6 +2157,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Gv_CL {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Ev_Gv_CL);
 
 impl OpCodeHandler_Ev_Gv_CL {
 	#[inline]
@@ -2135,6 +2194,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Mp {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_Mp);
 
 impl OpCodeHandler_Gv_Mp {
 	#[inline]
@@ -2172,6 +2232,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Eb {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_Eb);
 
 impl OpCodeHandler_Gv_Eb {
 	#[inline]
@@ -2210,6 +2271,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ew {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_Ew);
 
 impl OpCodeHandler_Gv_Ew {
 	#[inline]
@@ -2245,6 +2307,7 @@ pub(in crate::decoder) struct OpCodeHandler_PushSimple2 {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_PushSimple2);
 
 impl OpCodeHandler_PushSimple2 {
 	#[inline]
@@ -2277,6 +2340,7 @@ pub(in crate::decoder) struct OpCodeHandler_Simple2 {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Simple2);
 
 impl OpCodeHandler_Simple2 {
 	#[inline]
@@ -2297,6 +2361,7 @@ pub(in crate::decoder) struct OpCodeHandler_Simple2Iw {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Simple2Iw);
 
 impl OpCodeHandler_Simple2Iw {
 	#[inline]
@@ -2321,6 +2386,7 @@ pub(in crate::decoder) struct OpCodeHandler_Simple3 {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Simple3);
 
 impl OpCodeHandler_Simple3 {
 	#[inline]
@@ -2353,6 +2419,7 @@ pub(in crate::decoder) struct OpCodeHandler_Simple5 {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Simple5);
 
 impl OpCodeHandler_Simple5 {
 	#[inline]
@@ -2373,6 +2440,7 @@ pub(in crate::decoder) struct OpCodeHandler_Simple5_a32 {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Simple5_a32);
 
 impl OpCodeHandler_Simple5_a32 {
 	#[inline]
@@ -2397,6 +2465,7 @@ pub(in crate::decoder) struct OpCodeHandler_Simple5_ModRM_as {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Simple5_ModRM_as);
 
 impl OpCodeHandler_Simple5_ModRM_as {
 	#[inline]
@@ -2424,6 +2493,7 @@ pub(in crate::decoder) struct OpCodeHandler_Simple4 {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Simple4);
 
 impl OpCodeHandler_Simple4 {
 	#[inline]
@@ -2451,6 +2521,7 @@ pub(in crate::decoder) struct OpCodeHandler_PushSimpleReg {
 	code64: Code,
 	index: u32,
 }
+op_handler_impl!(OpCodeHandler_PushSimpleReg);
 
 impl OpCodeHandler_PushSimpleReg {
 	#[inline]
@@ -2488,6 +2559,7 @@ pub(in crate::decoder) struct OpCodeHandler_SimpleReg {
 	code: Code,
 	index: u32,
 }
+op_handler_impl!(OpCodeHandler_SimpleReg);
 
 impl OpCodeHandler_SimpleReg {
 	#[inline]
@@ -2573,6 +2645,7 @@ pub(in crate::decoder) struct OpCodeHandler_Xchg_Reg_rAX {
 	has_modrm: bool,
 	index: u32,
 }
+op_handler_impl!(OpCodeHandler_Xchg_Reg_rAX);
 
 impl OpCodeHandler_Xchg_Reg_rAX {
 	#[inline]
@@ -2612,6 +2685,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Iz {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Reg_Iz);
 
 impl OpCodeHandler_Reg_Iz {
 	#[inline]
@@ -2665,6 +2739,7 @@ pub(in crate::decoder) struct OpCodeHandler_RegIb3 {
 	has_modrm: bool,
 	index: u32,
 }
+op_handler_impl!(OpCodeHandler_RegIb3);
 
 impl OpCodeHandler_RegIb3 {
 	#[inline]
@@ -2696,6 +2771,7 @@ pub(in crate::decoder) struct OpCodeHandler_RegIz2 {
 	has_modrm: bool,
 	index: u32,
 }
+op_handler_impl!(OpCodeHandler_RegIz2);
 
 impl OpCodeHandler_RegIz2 {
 	#[inline]
@@ -2735,6 +2811,7 @@ pub(in crate::decoder) struct OpCodeHandler_PushIb2 {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_PushIb2);
 
 impl OpCodeHandler_PushIb2 {
 	#[inline]
@@ -2774,6 +2851,7 @@ pub(in crate::decoder) struct OpCodeHandler_PushIz {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_PushIz);
 
 impl OpCodeHandler_PushIz {
 	#[inline]
@@ -2815,6 +2893,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ma {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_Ma);
 
 impl OpCodeHandler_Gv_Ma {
 	#[inline]
@@ -2849,6 +2928,7 @@ pub(in crate::decoder) struct OpCodeHandler_RvMw_Gw {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_RvMw_Gw);
 
 impl OpCodeHandler_RvMw_Gw {
 	#[inline]
@@ -2886,6 +2966,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ev_Ib {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_Ev_Ib);
 
 impl OpCodeHandler_Gv_Ev_Ib {
 	#[inline]
@@ -2928,6 +3009,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ev_Ib_REX {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_Ev_Ib_REX);
 
 impl OpCodeHandler_Gv_Ev_Ib_REX {
 	#[inline]
@@ -2961,6 +3043,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ev_32_64 {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_Ev_32_64);
 
 impl OpCodeHandler_Gv_Ev_32_64 {
 	#[inline]
@@ -3012,6 +3095,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ev_Iz {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_Ev_Iz);
 
 impl OpCodeHandler_Gv_Ev_Iz {
 	#[inline]
@@ -3056,6 +3140,7 @@ pub(in crate::decoder) struct OpCodeHandler_Yb_Reg {
 	reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Yb_Reg);
 
 impl OpCodeHandler_Yb_Reg {
 	#[inline]
@@ -3084,6 +3169,7 @@ pub(in crate::decoder) struct OpCodeHandler_Yv_Reg {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Yv_Reg);
 
 impl OpCodeHandler_Yv_Reg {
 	#[inline]
@@ -3119,6 +3205,7 @@ pub(in crate::decoder) struct OpCodeHandler_Yv_Reg2 {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_Yv_Reg2);
 
 impl OpCodeHandler_Yv_Reg2 {
 	#[inline]
@@ -3152,6 +3239,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Xb {
 	reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Reg_Xb);
 
 impl OpCodeHandler_Reg_Xb {
 	#[inline]
@@ -3180,6 +3268,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Xv {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Reg_Xv);
 
 impl OpCodeHandler_Reg_Xv {
 	#[inline]
@@ -3215,6 +3304,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Xv2 {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_Reg_Xv2);
 
 impl OpCodeHandler_Reg_Xv2 {
 	#[inline]
@@ -3248,6 +3338,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Yb {
 	reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Reg_Yb);
 
 impl OpCodeHandler_Reg_Yb {
 	#[inline]
@@ -3276,6 +3367,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Yv {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Reg_Yv);
 
 impl OpCodeHandler_Reg_Yv {
 	#[inline]
@@ -3310,6 +3402,7 @@ pub(in crate::decoder) struct OpCodeHandler_Yb_Xb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Yb_Xb);
 
 impl OpCodeHandler_Yb_Xb {
 	#[inline]
@@ -3340,6 +3433,7 @@ pub(in crate::decoder) struct OpCodeHandler_Yv_Xv {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Yv_Xv);
 
 impl OpCodeHandler_Yv_Xv {
 	#[inline]
@@ -3370,6 +3464,7 @@ pub(in crate::decoder) struct OpCodeHandler_Xb_Yb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Xb_Yb);
 
 impl OpCodeHandler_Xb_Yb {
 	#[inline]
@@ -3400,6 +3495,7 @@ pub(in crate::decoder) struct OpCodeHandler_Xv_Yv {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Xv_Yv);
 
 impl OpCodeHandler_Xv_Yv {
 	#[inline]
@@ -3431,6 +3527,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Sw {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Ev_Sw);
 
 impl OpCodeHandler_Ev_Sw {
 	#[inline]
@@ -3465,6 +3562,7 @@ pub(in crate::decoder) struct OpCodeHandler_M_Sw {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_M_Sw);
 
 impl OpCodeHandler_M_Sw {
 	#[inline]
@@ -3495,6 +3593,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_M {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_M);
 
 impl OpCodeHandler_Gv_M {
 	#[inline]
@@ -3529,6 +3628,7 @@ pub(in crate::decoder) struct OpCodeHandler_Sw_Ev {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Sw_Ev);
 
 impl OpCodeHandler_Sw_Ev {
 	#[inline]
@@ -3566,6 +3666,7 @@ pub(in crate::decoder) struct OpCodeHandler_Sw_M {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Sw_M);
 
 impl OpCodeHandler_Sw_M {
 	#[inline]
@@ -3596,6 +3697,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ap {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_Ap);
 
 impl OpCodeHandler_Ap {
 	#[inline]
@@ -3628,6 +3730,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Ob {
 	reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Reg_Ob);
 
 impl OpCodeHandler_Reg_Ob {
 	#[inline]
@@ -3666,6 +3769,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ob_Reg {
 	reg: Register,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Ob_Reg);
 
 impl OpCodeHandler_Ob_Reg {
 	#[inline]
@@ -3703,6 +3807,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Ov {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Reg_Ov);
 
 impl OpCodeHandler_Reg_Ov {
 	#[inline]
@@ -3746,6 +3851,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ov_Reg {
 	has_modrm: bool,
 	code: [Code; 3],
 }
+op_handler_impl!(OpCodeHandler_Ov_Reg);
 
 impl OpCodeHandler_Ov_Reg {
 	#[inline]
@@ -3791,6 +3897,7 @@ pub(in crate::decoder) struct OpCodeHandler_BranchIw {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_BranchIw);
 
 impl OpCodeHandler_BranchIw {
 	#[inline]
@@ -3827,6 +3934,7 @@ pub(in crate::decoder) struct OpCodeHandler_BranchSimple {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_BranchSimple);
 
 impl OpCodeHandler_BranchSimple {
 	#[inline]
@@ -3861,6 +3969,7 @@ pub(in crate::decoder) struct OpCodeHandler_Iw_Ib {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Iw_Ib);
 
 impl OpCodeHandler_Iw_Ib {
 	#[inline]
@@ -3898,6 +4007,7 @@ pub(in crate::decoder) struct OpCodeHandler_Reg_Ib2 {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_Reg_Ib2);
 
 impl OpCodeHandler_Reg_Ib2 {
 	#[inline]
@@ -3927,6 +4037,7 @@ pub(in crate::decoder) struct OpCodeHandler_IbReg2 {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_IbReg2);
 
 impl OpCodeHandler_IbReg2 {
 	#[inline]
@@ -3956,6 +4067,7 @@ pub(in crate::decoder) struct OpCodeHandler_eAX_DX {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_eAX_DX);
 
 impl OpCodeHandler_eAX_DX {
 	#[inline]
@@ -3984,6 +4096,7 @@ pub(in crate::decoder) struct OpCodeHandler_DX_eAX {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_DX_eAX);
 
 impl OpCodeHandler_DX_eAX {
 	#[inline]
@@ -4012,6 +4125,7 @@ pub(in crate::decoder) struct OpCodeHandler_Eb_Ib {
 	code: Code,
 	state_flags_or_value: u32,
 }
+op_handler_impl!(OpCodeHandler_Eb_Ib);
 
 impl OpCodeHandler_Eb_Ib {
 	#[inline]
@@ -4050,6 +4164,7 @@ pub(in crate::decoder) struct OpCodeHandler_Eb_1 {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Eb_1);
 
 impl OpCodeHandler_Eb_1 {
 	#[inline]
@@ -4084,6 +4199,7 @@ pub(in crate::decoder) struct OpCodeHandler_Eb_CL {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Eb_CL);
 
 impl OpCodeHandler_Eb_CL {
 	#[inline]
@@ -4117,6 +4233,7 @@ pub(in crate::decoder) struct OpCodeHandler_Eb {
 	code: Code,
 	state_flags_or_value: u32,
 }
+op_handler_impl!(OpCodeHandler_Eb);
 
 impl OpCodeHandler_Eb {
 	#[inline]
@@ -4154,6 +4271,7 @@ pub(in crate::decoder) struct OpCodeHandler_Eb_Gb {
 	code: Code,
 	state_flags_or_value: u32,
 }
+op_handler_impl!(OpCodeHandler_Eb_Gb);
 
 impl OpCodeHandler_Eb_Gb {
 	#[inline]
@@ -4195,6 +4313,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gb_Eb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Gb_Eb);
 
 impl OpCodeHandler_Gb_Eb {
 	#[inline]
@@ -4233,6 +4352,7 @@ pub(in crate::decoder) struct OpCodeHandler_M {
 	code_w0: Code,
 	code_w1: Code,
 }
+op_handler_impl!(OpCodeHandler_M);
 
 impl OpCodeHandler_M {
 	#[inline]
@@ -4273,6 +4393,7 @@ pub(in crate::decoder) struct OpCodeHandler_M_REXW {
 	code64: Code,
 	state_flags_or_value: u32,
 }
+op_handler_impl!(OpCodeHandler_M_REXW);
 
 impl OpCodeHandler_M_REXW {
 	#[inline]
@@ -4315,6 +4436,7 @@ pub(in crate::decoder) struct OpCodeHandler_MemBx {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MemBx);
 
 impl OpCodeHandler_MemBx {
 	#[inline]
@@ -4344,6 +4466,7 @@ pub(in crate::decoder) struct OpCodeHandler_VW {
 	code_r: Code,
 	code_m: Code,
 }
+op_handler_impl!(OpCodeHandler_VW);
 
 impl OpCodeHandler_VW {
 	#[inline]
@@ -4378,6 +4501,7 @@ pub(in crate::decoder) struct OpCodeHandler_WV {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_WV);
 
 impl OpCodeHandler_WV {
 	#[inline]
@@ -4406,6 +4530,7 @@ pub(in crate::decoder) struct OpCodeHandler_rDI_VX_RX {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_rDI_VX_RX);
 
 impl OpCodeHandler_rDI_VX_RX {
 	#[inline]
@@ -4439,6 +4564,7 @@ pub(in crate::decoder) struct OpCodeHandler_rDI_P_N {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_rDI_P_N);
 
 impl OpCodeHandler_rDI_P_N {
 	#[inline]
@@ -4472,6 +4598,7 @@ pub(in crate::decoder) struct OpCodeHandler_VM {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_VM);
 
 impl OpCodeHandler_VM {
 	#[inline]
@@ -4500,6 +4627,7 @@ pub(in crate::decoder) struct OpCodeHandler_MV {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MV);
 
 impl OpCodeHandler_MV {
 	#[inline]
@@ -4528,6 +4656,7 @@ pub(in crate::decoder) struct OpCodeHandler_VQ {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_VQ);
 
 impl OpCodeHandler_VQ {
 	#[inline]
@@ -4556,6 +4685,7 @@ pub(in crate::decoder) struct OpCodeHandler_P_Q {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_P_Q);
 
 impl OpCodeHandler_P_Q {
 	#[inline]
@@ -4584,6 +4714,7 @@ pub(in crate::decoder) struct OpCodeHandler_Q_P {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Q_P);
 
 impl OpCodeHandler_Q_P {
 	#[inline]
@@ -4612,6 +4743,7 @@ pub(in crate::decoder) struct OpCodeHandler_MP {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MP);
 
 impl OpCodeHandler_MP {
 	#[inline]
@@ -4640,6 +4772,7 @@ pub(in crate::decoder) struct OpCodeHandler_P_Q_Ib {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_P_Q_Ib);
 
 impl OpCodeHandler_P_Q_Ib {
 	#[inline]
@@ -4670,6 +4803,7 @@ pub(in crate::decoder) struct OpCodeHandler_P_W {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_P_W);
 
 impl OpCodeHandler_P_W {
 	#[inline]
@@ -4698,6 +4832,7 @@ pub(in crate::decoder) struct OpCodeHandler_P_R {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_P_R);
 
 impl OpCodeHandler_P_R {
 	#[inline]
@@ -4725,6 +4860,7 @@ pub(in crate::decoder) struct OpCodeHandler_P_Ev {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_P_Ev);
 
 impl OpCodeHandler_P_Ev {
 	#[inline]
@@ -4761,6 +4897,7 @@ pub(in crate::decoder) struct OpCodeHandler_P_Ev_Ib {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_P_Ev_Ib);
 
 impl OpCodeHandler_P_Ev_Ib {
 	#[inline]
@@ -4799,6 +4936,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_P {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Ev_P);
 
 impl OpCodeHandler_Ev_P {
 	#[inline]
@@ -4835,6 +4973,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_W {
 	code_w0: Code,
 	code_w1: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_W);
 
 impl OpCodeHandler_Gv_W {
 	#[inline]
@@ -4869,6 +5008,7 @@ pub(in crate::decoder) struct OpCodeHandler_V_Ev {
 	code_w0: Code,
 	code_w1: Code,
 }
+op_handler_impl!(OpCodeHandler_V_Ev);
 
 impl OpCodeHandler_V_Ev {
 	#[inline]
@@ -4905,6 +5045,7 @@ pub(in crate::decoder) struct OpCodeHandler_VWIb {
 	code_w0: Code,
 	code_w1: Code,
 }
+op_handler_impl!(OpCodeHandler_VWIb);
 
 impl OpCodeHandler_VWIb {
 	#[inline]
@@ -4944,6 +5085,7 @@ pub(in crate::decoder) struct OpCodeHandler_VRIbIb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_VRIbIb);
 
 impl OpCodeHandler_VRIbIb {
 	#[inline]
@@ -4975,6 +5117,7 @@ pub(in crate::decoder) struct OpCodeHandler_RIbIb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_RIbIb);
 
 impl OpCodeHandler_RIbIb {
 	#[inline]
@@ -5005,6 +5148,7 @@ pub(in crate::decoder) struct OpCodeHandler_RIb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_RIb);
 
 impl OpCodeHandler_RIb {
 	#[inline]
@@ -5033,6 +5177,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ed_V_Ib {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Ed_V_Ib);
 
 impl OpCodeHandler_Ed_V_Ib {
 	#[inline]
@@ -5071,6 +5216,7 @@ pub(in crate::decoder) struct OpCodeHandler_VX_Ev {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_VX_Ev);
 
 impl OpCodeHandler_VX_Ev {
 	#[inline]
@@ -5107,6 +5253,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_VX {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Ev_VX);
 
 impl OpCodeHandler_Ev_VX {
 	#[inline]
@@ -5143,6 +5290,7 @@ pub(in crate::decoder) struct OpCodeHandler_VX_E_Ib {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_VX_E_Ib);
 
 impl OpCodeHandler_VX_E_Ib {
 	#[inline]
@@ -5181,6 +5329,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_RX {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_RX);
 
 impl OpCodeHandler_Gv_RX {
 	#[inline]
@@ -5215,6 +5364,7 @@ pub(in crate::decoder) struct OpCodeHandler_B_MIB {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_B_MIB);
 
 impl OpCodeHandler_B_MIB {
 	#[inline]
@@ -5249,6 +5399,7 @@ pub(in crate::decoder) struct OpCodeHandler_MIB_B {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MIB_B);
 
 impl OpCodeHandler_MIB_B {
 	#[inline]
@@ -5284,6 +5435,7 @@ pub(in crate::decoder) struct OpCodeHandler_B_BM {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_B_BM);
 
 impl OpCodeHandler_B_BM {
 	#[inline]
@@ -5322,6 +5474,7 @@ pub(in crate::decoder) struct OpCodeHandler_BM_B {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_BM_B);
 
 impl OpCodeHandler_BM_B {
 	#[inline]
@@ -5361,6 +5514,7 @@ pub(in crate::decoder) struct OpCodeHandler_B_Ev {
 	code64: Code,
 	rip_rel_mask: u32,
 }
+op_handler_impl!(OpCodeHandler_B_Ev);
 
 impl OpCodeHandler_B_Ev {
 	#[inline]
@@ -5403,6 +5557,7 @@ pub(in crate::decoder) struct OpCodeHandler_Mv_Gv_REXW {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Mv_Gv_REXW);
 
 impl OpCodeHandler_Mv_Gv_REXW {
 	#[inline]
@@ -5437,6 +5592,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_N_Ib_REX {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_N_Ib_REX);
 
 impl OpCodeHandler_Gv_N_Ib_REX {
 	#[inline]
@@ -5474,6 +5630,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_N {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_N);
 
 impl OpCodeHandler_Gv_N {
 	#[inline]
@@ -5508,6 +5665,7 @@ pub(in crate::decoder) struct OpCodeHandler_VN {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_VN);
 
 impl OpCodeHandler_VN {
 	#[inline]
@@ -5535,6 +5693,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Mv {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Gv_Mv);
 
 impl OpCodeHandler_Gv_Mv {
 	#[inline]
@@ -5569,6 +5728,7 @@ pub(in crate::decoder) struct OpCodeHandler_Mv_Gv {
 	code: [Code; 3],
 	reg_base: [u32; 3],
 }
+op_handler_impl!(OpCodeHandler_Mv_Gv);
 
 impl OpCodeHandler_Mv_Gv {
 	#[inline]
@@ -5603,6 +5763,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Eb_REX {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_Eb_REX);
 
 impl OpCodeHandler_Gv_Eb_REX {
 	#[inline]
@@ -5641,6 +5802,7 @@ pub(in crate::decoder) struct OpCodeHandler_Gv_Ev_REX {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Gv_Ev_REX);
 
 impl OpCodeHandler_Gv_Ev_REX {
 	#[inline]
@@ -5679,6 +5841,7 @@ pub(in crate::decoder) struct OpCodeHandler_Ev_Gv_REX {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_Ev_Gv_REX);
 
 impl OpCodeHandler_Ev_Gv_REX {
 	#[inline]
@@ -5713,6 +5876,7 @@ pub(in crate::decoder) struct OpCodeHandler_GvM_VX_Ib {
 	code32: Code,
 	code64: Code,
 }
+op_handler_impl!(OpCodeHandler_GvM_VX_Ib);
 
 impl OpCodeHandler_GvM_VX_Ib {
 	#[inline]
@@ -5749,6 +5913,7 @@ impl OpCodeHandler_GvM_VX_Ib {
 pub(in crate::decoder) struct OpCodeHandler_Wbinvd {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_Wbinvd);
 
 impl OpCodeHandler_Wbinvd {
 	#[inline]

@@ -273,6 +273,7 @@ static CODE_VALUES: [Code; 0x100] = [
 pub(in crate::decoder) struct OpCodeHandler_D3NOW {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_D3NOW);
 
 #[cfg(not(feature = "no_d3now"))]
 impl OpCodeHandler_D3NOW {

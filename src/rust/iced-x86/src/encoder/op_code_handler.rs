@@ -35,10 +35,53 @@ pub(crate) struct OpCodeHandler {
 	pub(super) is_special_instr: bool,
 }
 
+/// A type which can be cast to a `&OpCodeHandler`
+///
+/// # Safety
+///
+/// Types which implement this trait must be `#[repr(C)]`,
+/// and their first field must be an `OpCodeHandler`.
+pub(super) unsafe trait OpCodeHandlerImpl {
+	fn as_base(&self) -> &OpCodeHandler;
+
+	fn leaked(self) -> &'static OpCodeHandler
+	where
+		Self: Sized,
+		Self: 'static,
+	{
+		let this = Box::leak(Box::new(self));
+		let base = this.as_base();
+		{
+			let this: *const Self = this;
+			let base: *const OpCodeHandler = base;
+			debug_assert!(this.cast::<OpCodeHandler>() == base);
+		}
+		base
+	}
+}
+
+macro_rules! op_handler_impl {
+	($t:ty) => {
+		// Should be able to use `std::mem::offset_of!` once it is available
+		const _: () = unsafe {
+			let store = std::mem::MaybeUninit::<$t>::uninit();
+			let p = store.as_ptr();
+			let base_ptr: *const OpCodeHandler = std::ptr::addr_of!((*p).base);
+			assert!(base_ptr.cast::<u8>().offset_from(p.cast::<u8>()) == 0)
+		};
+		unsafe impl OpCodeHandlerImpl for $t {
+			fn as_base(&self) -> &OpCodeHandler {
+				&self.base
+			}
+		}
+	};
+}
+
 #[repr(C)]
 pub(super) struct InvalidHandler {
 	pub(super) base: OpCodeHandler,
 }
+op_handler_impl!(InvalidHandler);
 
 impl InvalidHandler {
 	pub(super) fn new() -> Self {
@@ -71,6 +114,7 @@ pub(super) struct DeclareDataHandler {
 	base: OpCodeHandler,
 	elem_size: u32,
 }
+op_handler_impl!(DeclareDataHandler);
 
 impl DeclareDataHandler {
 	pub(super) fn new(code: Code) -> Self {
@@ -117,6 +161,7 @@ impl DeclareDataHandler {
 pub(super) struct ZeroBytesHandler {
 	base: OpCodeHandler,
 }
+op_handler_impl!(ZeroBytesHandler);
 
 impl ZeroBytesHandler {
 	pub(super) fn new(_code: Code) -> Self {
@@ -151,6 +196,7 @@ pub(super) struct LegacyHandler {
 	table_byte2: u32,
 	mandatory_prefix: u32,
 }
+op_handler_impl!(LegacyHandler);
 
 impl LegacyHandler {
 	pub(super) fn new(enc_flags1: u32, enc_flags2: u32, enc_flags3: u32) -> Self {
@@ -273,6 +319,8 @@ pub(super) struct VexHandler {
 	mask_l: u32,
 	w1: u32,
 }
+#[cfg(not(feature = "no_vex"))]
+op_handler_impl!(VexHandler);
 
 #[cfg(not(feature = "no_vex"))]
 impl VexHandler {
@@ -400,6 +448,8 @@ pub(super) struct XopHandler {
 	table: u32,
 	last_byte: u32,
 }
+#[cfg(not(feature = "no_xop"))]
+op_handler_impl!(XopHandler);
 
 #[cfg(not(feature = "no_xop"))]
 impl XopHandler {
@@ -503,6 +553,8 @@ pub(super) struct EvexHandler {
 	tuple_type: TupleType,
 	wbit: WBit,
 }
+#[cfg(not(feature = "no_evex"))]
+op_handler_impl!(EvexHandler);
 
 #[cfg(not(feature = "no_evex"))]
 impl EvexHandler {
@@ -682,6 +734,8 @@ pub(super) struct MvexHandler {
 	mask_w: u32,
 	wbit: WBit,
 }
+#[cfg(feature = "mvex")]
+op_handler_impl!(MvexHandler);
 
 #[cfg(feature = "mvex")]
 impl MvexHandler {
@@ -875,6 +929,8 @@ pub(super) struct D3nowHandler {
 	base: OpCodeHandler,
 	immediate: u32,
 }
+#[cfg(not(feature = "no_d3now"))]
+op_handler_impl!(D3nowHandler);
 
 #[cfg(not(feature = "no_d3now"))]
 impl D3nowHandler {

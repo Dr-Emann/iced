@@ -66,31 +66,28 @@ pub(super) type OpCodeHandlerDecodeFn = fn(*const OpCodeHandler, &mut Decoder<'_
 #[must_use]
 #[inline]
 pub(super) fn is_null_instance_handler(handler: &OpCodeHandler) -> bool {
-	handler as *const _ as *const u8 == &NULL_HANDLER as *const _ as *const u8
+	ptr::eq(handler, NULL_HANDLER.as_base())
 }
 
 #[allow(trivial_casts)]
 #[must_use]
 #[inline]
 pub(super) fn get_null_handler() -> (OpCodeHandlerDecodeFn, &'static OpCodeHandler) {
-	// SAFETY: it's #[repr(C)] and the first part is an `OpCodeHandler`
-	(OpCodeHandler_Invalid::decode, unsafe { &*(&NULL_HANDLER as *const _ as *const OpCodeHandler) })
+	(OpCodeHandler_Invalid::decode, NULL_HANDLER.as_base())
 }
 
 #[allow(trivial_casts)]
 #[must_use]
 #[inline]
 pub(super) fn get_invalid_handler() -> (OpCodeHandlerDecodeFn, &'static OpCodeHandler) {
-	// SAFETY: it's #[repr(C)] and the first part is an `OpCodeHandler`
-	(OpCodeHandler_Invalid::decode, unsafe { &*(&INVALID_HANDLER as *const _ as *const OpCodeHandler) })
+	(OpCodeHandler_Invalid::decode, INVALID_HANDLER.as_base())
 }
 
 #[allow(trivial_casts)]
 #[must_use]
 #[inline]
 pub(super) fn get_invalid_no_modrm_handler() -> (OpCodeHandlerDecodeFn, &'static OpCodeHandler) {
-	// SAFETY: it's #[repr(C)] and the first part is an `OpCodeHandler`
-	(OpCodeHandler_Invalid::decode, unsafe { &*(&INVALID_NO_MODRM_HANDLER as *const _ as *const OpCodeHandler) })
+	(OpCodeHandler_Invalid::decode, INVALID_NO_MODRM_HANDLER.as_base())
 }
 
 #[rustfmt::skip]
@@ -111,11 +108,56 @@ pub(super) struct OpCodeHandler {
 	pub(super) has_modrm: bool,
 }
 
+/// A type which can be cast to a `&OpCodeHandler`
+///
+/// # Safety
+///
+/// Types which implement this trait must be `#[repr(C)]`, and start with the same fields as `OpCodeHandler`.
+pub(crate) unsafe trait OpCodeHandlerImpl {
+	fn as_base(&self) -> &OpCodeHandler;
+
+	fn leaked(self) -> &'static OpCodeHandler
+	where
+		Self: Sized,
+		Self: 'static,
+	{
+		let this = Box::leak(Box::new(self));
+		let base = this.as_base();
+		{
+			let this: *const Self = this;
+			let base: *const OpCodeHandler = base;
+			debug_assert!(this.cast::<OpCodeHandler>() == base);
+		}
+		base
+	}
+}
+
+const _: () = assert!(mem::size_of::<OpCodeHandler>() == mem::size_of::<bool>(), "below macro needs updated to check for extra fields",);
+macro_rules! op_handler_impl {
+	($t:ty) => {
+		// Should be able to use `std::mem::offset_of!` once it is available
+		const _: () = unsafe {
+			let store = ::core::mem::MaybeUninit::<$t>::uninit();
+			let p = store.as_ptr();
+			let base_ptr: *const bool = ::core::ptr::addr_of!((*p).has_modrm);
+			assert!(base_ptr.cast::<u8>().offset_from(p.cast::<u8>()) == 0)
+		};
+		unsafe impl OpCodeHandlerImpl for $t {
+			fn as_base(&self) -> &OpCodeHandler {
+				let this: *const Self = self;
+				unsafe { &*(this.cast::<OpCodeHandler>()) }
+			}
+		}
+	};
+}
+use op_handler_impl;
+
 #[allow(non_camel_case_types)]
 #[repr(C)]
 pub(super) struct OpCodeHandler_Invalid {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_Invalid);
 
 impl OpCodeHandler_Invalid {
 	fn decode(_self_ptr: *const OpCodeHandler, decoder: &mut Decoder<'_>, _instruction: &mut Instruction) {
@@ -129,6 +171,7 @@ pub(super) struct OpCodeHandler_Simple {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_Simple);
 
 impl OpCodeHandler_Simple {
 	#[inline]
@@ -152,6 +195,7 @@ impl OpCodeHandler_Simple {
 pub(super) struct OpCodeHandler_Int3 {
 	has_modrm: bool,
 }
+op_handler_impl!(OpCodeHandler_Int3);
 
 impl OpCodeHandler_Int3 {
 	#[inline]
@@ -171,6 +215,7 @@ pub(super) struct OpCodeHandler_Group8x8 {
 	table_low: Box<[(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 8]>,
 	table_high: Box<[(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 8]>,
 }
+op_handler_impl!(OpCodeHandler_Group8x8);
 
 impl OpCodeHandler_Group8x8 {
 	#[inline]
@@ -204,6 +249,7 @@ pub(super) struct OpCodeHandler_Group8x64 {
 	table_low: Box<[(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 8]>,
 	table_high: Box<[(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 0x40]>,
 }
+op_handler_impl!(OpCodeHandler_Group8x64);
 
 impl OpCodeHandler_Group8x64 {
 	#[inline]
@@ -244,6 +290,7 @@ pub(super) struct OpCodeHandler_Group {
 	has_modrm: bool,
 	group_handlers: Box<[(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 8]>,
 }
+op_handler_impl!(OpCodeHandler_Group);
 
 impl OpCodeHandler_Group {
 	#[inline]
@@ -268,6 +315,7 @@ pub(super) struct OpCodeHandler_AnotherTable {
 	has_modrm: bool,
 	handlers: Box<[(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 0x100]>,
 }
+op_handler_impl!(OpCodeHandler_AnotherTable);
 
 impl OpCodeHandler_AnotherTable {
 	#[allow(clippy::unwrap_used)]
@@ -305,6 +353,8 @@ pub(super) struct OpCodeHandler_MandatoryPrefix2 {
 	has_modrm: bool,
 	handlers: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 4],
 }
+#[cfg(any(not(feature = "no_vex"), not(feature = "no_xop"), not(feature = "no_evex"), feature = "mvex"))]
+op_handler_impl!(OpCodeHandler_MandatoryPrefix2);
 
 #[cfg(any(not(feature = "no_vex"), not(feature = "no_xop"), not(feature = "no_evex"), feature = "mvex"))]
 impl OpCodeHandler_MandatoryPrefix2 {
@@ -349,6 +399,8 @@ pub(super) struct OpCodeHandler_W {
 	has_modrm: bool,
 	handlers: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 2],
 }
+#[cfg(any(not(feature = "no_vex"), not(feature = "no_xop"), not(feature = "no_evex"), feature = "mvex"))]
+op_handler_impl!(OpCodeHandler_W);
 
 #[cfg(any(not(feature = "no_vex"), not(feature = "no_xop"), not(feature = "no_evex"), feature = "mvex"))]
 impl OpCodeHandler_W {
@@ -381,6 +433,7 @@ pub(super) struct OpCodeHandler_Bitness {
 	handler1632: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 	handler64: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_Bitness);
 
 impl OpCodeHandler_Bitness {
 	#[inline]
@@ -409,6 +462,7 @@ pub(super) struct OpCodeHandler_Bitness_DontReadModRM {
 	handler1632: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 	handler64: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_Bitness_DontReadModRM);
 
 impl OpCodeHandler_Bitness_DontReadModRM {
 	#[inline]
@@ -434,6 +488,7 @@ pub(super) struct OpCodeHandler_RM {
 	reg: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 	mem: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 }
+op_handler_impl!(OpCodeHandler_RM);
 
 impl OpCodeHandler_RM {
 	#[inline]
@@ -460,6 +515,7 @@ pub(super) struct OpCodeHandler_Options1632 {
 	infos: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler, u32); 2],
 	info_options: u32,
 }
+op_handler_impl!(OpCodeHandler_Options1632);
 
 impl OpCodeHandler_Options1632 {
 	#[allow(trivial_casts)]
@@ -527,6 +583,7 @@ pub(super) struct OpCodeHandler_Options {
 	infos: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler, u32); 2],
 	info_options: u32,
 }
+op_handler_impl!(OpCodeHandler_Options);
 
 impl OpCodeHandler_Options {
 	#[allow(trivial_casts)]
@@ -594,6 +651,7 @@ pub(super) struct OpCodeHandler_Options_DontReadModRM {
 	opt_handler: (OpCodeHandlerDecodeFn, &'static OpCodeHandler),
 	flags: u32,
 }
+op_handler_impl!(OpCodeHandler_Options_DontReadModRM);
 
 impl OpCodeHandler_Options_DontReadModRM {
 	#[inline]

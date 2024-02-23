@@ -20,21 +20,21 @@ mod mvex_reader;
 mod vex_reader;
 
 use crate::data_reader::DataReader;
-use crate::decoder::handlers::OpCodeHandler;
 use crate::decoder::handlers::{is_null_instance_handler, OpCodeHandlerDecodeFn};
+use crate::decoder::handlers::{OpCodeHandler, OpCodeHandlerImpl};
 use crate::decoder::table_de::enums::*;
 use crate::iced_constants::IcedConstants;
 use crate::{Code, CodeUnderlyingType, Register, RegisterUnderlyingType};
 #[cfg(not(feature = "no_evex"))]
 use crate::{TupleType, TupleTypeUnderlyingType};
-use alloc::boxed::Box;
 use alloc::vec::Vec;
 use core::mem;
 
 #[inline]
-fn box_opcode_handler<T>((decode, handler): (OpCodeHandlerDecodeFn, T)) -> (OpCodeHandlerDecodeFn, *const OpCodeHandler) {
-	// All handlers are #[repr(C)] and the first fields are the same as OpCodeHandler
-	(decode, Box::into_raw(Box::new(handler)) as *const OpCodeHandler)
+fn box_opcode_handler<T: OpCodeHandlerImpl + 'static>(
+	(decode, handler): (OpCodeHandlerDecodeFn, T),
+) -> (OpCodeHandlerDecodeFn, &'static OpCodeHandler) {
+	(decode, handler.leaked())
 }
 
 enum HandlerInfo {

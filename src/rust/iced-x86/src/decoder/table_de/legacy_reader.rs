@@ -18,7 +18,7 @@ use alloc::vec::Vec;
 #[allow(trivial_casts)]
 pub(super) fn read_handlers(deserializer: &mut TableDeserializer<'_>, result: &mut Vec<(OpCodeHandlerDecodeFn, &'static OpCodeHandler)>) {
 	let index;
-	let (decode, handler_ptr): (OpCodeHandlerDecodeFn, *const OpCodeHandler) = match deserializer.read_legacy_op_code_handler_kind() {
+	let decode_handler: (OpCodeHandlerDecodeFn, &'static OpCodeHandler) = match deserializer.read_legacy_op_code_handler_kind() {
 		LegacyOpCodeHandlerKind::Bitness => box_opcode_handler(OpCodeHandler_Bitness::new(deserializer.read_handler(), deserializer.read_handler())),
 
 		LegacyOpCodeHandlerKind::Bitness_DontReadModRM => {
@@ -850,6 +850,5 @@ pub(super) fn read_handlers(deserializer: &mut TableDeserializer<'_>, result: &m
 		LegacyOpCodeHandlerKind::PrefixF3 => box_opcode_handler(OpCodeHandler_PrefixF3::new()),
 		LegacyOpCodeHandlerKind::PrefixREX => box_opcode_handler(OpCodeHandler_PrefixREX::new(deserializer.read_handler(), deserializer.read_u32())),
 	};
-	let handler = unsafe { &*handler_ptr };
-	result.push((decode, handler));
+	result.push(decode_handler);
 }

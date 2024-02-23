@@ -16,6 +16,7 @@ pub(in crate::decoder) struct OpCodeHandler_ST_STi {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_ST_STi);
 
 impl OpCodeHandler_ST_STi {
 	#[inline]
@@ -38,6 +39,7 @@ pub(in crate::decoder) struct OpCodeHandler_STi_ST {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_STi_ST);
 
 impl OpCodeHandler_STi_ST {
 	#[inline]
@@ -60,6 +62,7 @@ pub(in crate::decoder) struct OpCodeHandler_STi {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_STi);
 
 impl OpCodeHandler_STi {
 	#[inline]
@@ -82,6 +85,7 @@ pub(in crate::decoder) struct OpCodeHandler_Mf {
 	code16: Code,
 	code32: Code,
 }
+op_handler_impl!(OpCodeHandler_Mf);
 
 impl OpCodeHandler_Mf {
 	#[inline]

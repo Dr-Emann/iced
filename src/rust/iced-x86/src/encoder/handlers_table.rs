@@ -16,7 +16,7 @@ use lazy_static::lazy_static;
 lazy_static! {
 	pub(crate) static ref HANDLERS_TABLE: Box<[&'static OpCodeHandler; IcedConstants::CODE_ENUM_COUNT]> = {
 		let mut v = Vec::with_capacity(IcedConstants::CODE_ENUM_COUNT);
-		let invalid_handler = Box::into_raw(Box::new(InvalidHandler::new())) as *const OpCodeHandler;
+		let invalid_handler = InvalidHandler::new().leaked();
 		for code in Code::values() {
 			let enc_flags1 = ENC_FLAGS1[code as usize];
 			let enc_flags2 = ENC_FLAGS2[code as usize];
@@ -28,35 +28,35 @@ lazy_static! {
 					if code == Code::INVALID {
 						invalid_handler
 					} else if code <= Code::DeclareQword {
-						Box::into_raw(Box::new(DeclareDataHandler::new(code))) as *const OpCodeHandler
+						DeclareDataHandler::new(code).leaked()
 					} else if code == Code::Zero_bytes {
-						Box::into_raw(Box::new(ZeroBytesHandler::new(code))) as *const OpCodeHandler
+						ZeroBytesHandler::new(code).leaked()
 					} else {
-						Box::into_raw(Box::new(LegacyHandler::new(enc_flags1, enc_flags2, enc_flags3))) as *const OpCodeHandler
+						LegacyHandler::new(enc_flags1, enc_flags2, enc_flags3).leaked()
 					}
 				}
 				#[cfg(not(feature = "no_vex"))]
-				EncodingKind::VEX => Box::into_raw(Box::new(VexHandler::new(enc_flags1, enc_flags2, enc_flags3))) as *const OpCodeHandler,
+				EncodingKind::VEX => VexHandler::new(enc_flags1, enc_flags2, enc_flags3).leaked(),
 				#[cfg(feature = "no_vex")]
 				EncodingKind::VEX => invalid_handler,
 				#[cfg(not(feature = "no_evex"))]
-				EncodingKind::EVEX => Box::into_raw(Box::new(EvexHandler::new(enc_flags1, enc_flags2, enc_flags3))) as *const OpCodeHandler,
+				EncodingKind::EVEX => EvexHandler::new(enc_flags1, enc_flags2, enc_flags3).leaked(),
 				#[cfg(feature = "no_evex")]
 				EncodingKind::EVEX => invalid_handler,
 				#[cfg(not(feature = "no_xop"))]
-				EncodingKind::XOP => Box::into_raw(Box::new(XopHandler::new(enc_flags1, enc_flags2, enc_flags3))) as *const OpCodeHandler,
+				EncodingKind::XOP => XopHandler::new(enc_flags1, enc_flags2, enc_flags3).leaked(),
 				#[cfg(feature = "no_xop")]
 				EncodingKind::XOP => invalid_handler,
 				#[cfg(not(feature = "no_d3now"))]
-				EncodingKind::D3NOW => Box::into_raw(Box::new(D3nowHandler::new(enc_flags2, enc_flags3))) as *const OpCodeHandler,
+				EncodingKind::D3NOW => D3nowHandler::new(enc_flags2, enc_flags3).leaked(),
 				#[cfg(feature = "no_d3now")]
 				EncodingKind::D3NOW => invalid_handler,
 				#[cfg(feature = "mvex")]
-				EncodingKind::MVEX => Box::into_raw(Box::new(MvexHandler::new(enc_flags1, enc_flags2, enc_flags3))) as *const OpCodeHandler,
+				EncodingKind::MVEX => MvexHandler::new(enc_flags1, enc_flags2, enc_flags3).leaked(),
 				#[cfg(not(feature = "mvex"))]
 				EncodingKind::MVEX => invalid_handler,
 			};
-			v.push(unsafe { &*handler });
+			v.push(handler);
 		}
 		#[allow(clippy::unwrap_used)]
 		v.into_boxed_slice().try_into().ok().unwrap()

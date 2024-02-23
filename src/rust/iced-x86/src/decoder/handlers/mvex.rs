@@ -92,6 +92,7 @@ pub(in crate::decoder) struct OpCodeHandler_EH {
 	has_modrm: bool,
 	handlers: [(OpCodeHandlerDecodeFn, &'static OpCodeHandler); 2],
 }
+op_handler_impl!(OpCodeHandler_EH);
 
 impl OpCodeHandler_EH {
 	#[inline]
@@ -117,6 +118,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_M {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_M);
 
 impl OpCodeHandler_MVEX_M {
 	#[inline]
@@ -153,6 +155,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_MV {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_MV);
 
 impl OpCodeHandler_MVEX_MV {
 	#[inline]
@@ -193,6 +196,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_VW {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_VW);
 
 impl OpCodeHandler_MVEX_VW {
 	#[inline]
@@ -235,6 +239,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_HWIb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_HWIb);
 
 impl OpCodeHandler_MVEX_HWIb {
 	#[inline]
@@ -273,6 +278,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_VWIb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_VWIb);
 
 impl OpCodeHandler_MVEX_VWIb {
 	#[inline]
@@ -317,6 +323,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_VHW {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_VHW);
 
 impl OpCodeHandler_MVEX_VHW {
 	#[inline]
@@ -360,6 +367,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_VHWIb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_VHWIb);
 
 impl OpCodeHandler_MVEX_VHWIb {
 	#[inline]
@@ -402,6 +410,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_VKW {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_VKW);
 
 impl OpCodeHandler_MVEX_VKW {
 	#[inline]
@@ -445,6 +454,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_KHW {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_KHW);
 
 impl OpCodeHandler_MVEX_KHW {
 	#[inline]
@@ -485,6 +495,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_KHWIb {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_KHWIb);
 
 impl OpCodeHandler_MVEX_KHWIb {
 	#[inline]
@@ -527,6 +538,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_VSIB {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_VSIB);
 
 impl OpCodeHandler_MVEX_VSIB {
 	#[inline]
@@ -564,6 +576,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_VSIB_V {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_VSIB_V);
 
 impl OpCodeHandler_MVEX_VSIB_V {
 	#[inline]
@@ -605,6 +618,7 @@ pub(in crate::decoder) struct OpCodeHandler_MVEX_V_VSIB {
 	has_modrm: bool,
 	code: Code,
 }
+op_handler_impl!(OpCodeHandler_MVEX_V_VSIB);
 
 impl OpCodeHandler_MVEX_V_VSIB {
 	#[inline]

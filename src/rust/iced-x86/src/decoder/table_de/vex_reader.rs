@@ -14,7 +14,7 @@ use alloc::vec::Vec;
 #[allow(trivial_casts)]
 pub(super) fn read_handlers(deserializer: &mut TableDeserializer<'_>, result: &mut Vec<(OpCodeHandlerDecodeFn, &'static OpCodeHandler)>) {
 	let reg;
-	let (decode, handler_ptr): (OpCodeHandlerDecodeFn, *const OpCodeHandler) = match deserializer.read_vex_op_code_handler_kind() {
+	let decode_handler: (OpCodeHandlerDecodeFn, &'static OpCodeHandler) = match deserializer.read_vex_op_code_handler_kind() {
 		VexOpCodeHandlerKind::Invalid => {
 			result.push(get_invalid_handler());
 			return;
@@ -312,6 +312,5 @@ pub(super) fn read_handlers(deserializer: &mut TableDeserializer<'_>, result: &m
 		VexOpCodeHandlerKind::K_Jb => box_opcode_handler(OpCodeHandler_VEX_K_Jb::new(deserializer.read_code())),
 		VexOpCodeHandlerKind::K_Jz => box_opcode_handler(OpCodeHandler_VEX_K_Jz::new(deserializer.read_code())),
 	};
-	let handler = unsafe { &*handler_ptr };
-	result.push((decode, handler));
+	result.push(decode_handler);
 }
